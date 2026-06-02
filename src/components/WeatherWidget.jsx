@@ -42,93 +42,54 @@ export default function WeatherWidget() {
 
   const getWeatherInfo = (code) => {
     if (code === 0)
-      return {
-        icon: "☀️",
-        text: "Clear Sky",
-      };
+      return { icon: "☀️", text: "Clear Sky" };
 
     if ([1, 2, 3].includes(code))
-      return {
-        icon: "⛅",
-        text: "Partly Cloudy",
-      };
+      return { icon: "⛅", text: "Partly Cloudy" };
 
-    if (
-      [45, 48].includes(code)
-    )
-      return {
-        icon: "🌫️",
-        text: "Foggy",
-      };
+    if ([45, 48].includes(code))
+      return { icon: "🌫️", text: "Foggy" };
 
-    if (
-      code >= 51 &&
-      code <= 67
-    )
-      return {
-        icon: "🌧️",
-        text: "Rain",
-      };
+    if (code >= 51 && code <= 67)
+      return { icon: "🌧️", text: "Rain" };
 
-    if (
-      code >= 71 &&
-      code <= 77
-    )
-      return {
-        icon: "❄️",
-        text: "Snow",
-      };
+    if (code >= 71 && code <= 77)
+      return { icon: "❄️", text: "Snow" };
 
-    if (
-      code >= 80 &&
-      code <= 82
-    )
-      return {
-        icon: "🌦️",
-        text: "Rain Showers",
-      };
+    if (code >= 80 && code <= 82)
+      return { icon: "🌦️", text: "Rain Showers" };
 
-    if (
-      code >= 95
-    )
-      return {
-        icon: "⛈️",
-        text: "Thunderstorm",
-      };
+    if (code >= 95)
+      return { icon: "⛈️", text: "Thunderstorm" };
 
-    return {
-      icon: "🌤️",
-      text: "Weather",
-    };
+    return { icon: "🌤️", text: "Weather" };
   };
 
   return (
     <div
       style={{
-        background:
-          "linear-gradient(145deg,#1e293b,#0f172a)",
+        background: "var(--card)",
+        color: "var(--text)",
         padding: "30px",
         borderRadius: "24px",
         marginTop: "25px",
         textAlign: "center",
-        border:
-          "1px solid rgba(255,255,255,0.08)",
+        border: "1px solid var(--border)",
         boxShadow:
-          "0 10px 40px rgba(0,0,0,0.4)",
+          "0 10px 40px var(--shadow)",
       }}
     >
       <h2
         style={{
           marginBottom: "20px",
+          color: "#38bdf8",
         }}
       >
         🌦 Hyderabad Live Weather
       </h2>
 
       {loading ? (
-        <p>
-          Loading Weather...
-        </p>
+        <p>Loading Weather...</p>
       ) : error ? (
         <p
           style={{
@@ -176,14 +137,12 @@ export default function WeatherWidget() {
 
           <p
             style={{
-              color: "#cbd5e1",
+              color: "var(--secondary)",
               fontSize: "18px",
             }}
           >
             Feels Like{" "}
-            {
-              weather.apparent_temperature
-            }
+            {weather.apparent_temperature}
             °C
           </p>
 
@@ -197,33 +156,22 @@ export default function WeatherWidget() {
             }}
           >
             <div>
-              <h3>
-                💧 Humidity
-              </h3>
+              <h3>💧 Humidity</h3>
               <p>
-                {
-                  weather.relative_humidity_2m
-                }
-                %
+                {weather.relative_humidity_2m}%
               </p>
             </div>
 
             <div>
-              <h3>
-                🌬 Wind
-              </h3>
+              <h3>🌬 Wind</h3>
               <p>
-                {
-                  weather.wind_speed_10m
-                }
+                {weather.wind_speed_10m}
                 km/h
               </p>
             </div>
 
             <div>
-              <h3>
-                🌅 Sunrise
-              </h3>
+              <h3>🌅 Sunrise</h3>
               <p>
                 {weather.sunrise?.slice(
                   11,
@@ -233,9 +181,7 @@ export default function WeatherWidget() {
             </div>
 
             <div>
-              <h3>
-                🌇 Sunset
-              </h3>
+              <h3>🌇 Sunset</h3>
               <p>
                 {weather.sunset?.slice(
                   11,
@@ -247,33 +193,25 @@ export default function WeatherWidget() {
 
           <p
             style={{
-              color: "#94a3b8",
+              color: "var(--secondary)",
               marginTop: "20px",
               fontSize: "14px",
             }}
           >
-            Updated:{" "}
-            {weather.updatedAt}
+            Updated: {weather.updatedAt}
           </p>
 
           <button
-            onClick={
-              fetchWeather
-            }
+            onClick={fetchWeather}
             style={{
               marginTop: "20px",
-              padding:
-                "12px 20px",
-              borderRadius:
-                "10px",
+              padding: "12px 20px",
+              borderRadius: "10px",
               border: "none",
-              background:
-                "#38bdf8",
+              background: "#38bdf8",
               color: "white",
-              cursor:
-                "pointer",
-              fontWeight:
-                "bold",
+              cursor: "pointer",
+              fontWeight: "bold",
             }}
           >
             🔄 Refresh

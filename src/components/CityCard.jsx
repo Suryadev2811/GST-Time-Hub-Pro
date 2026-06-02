@@ -15,13 +15,13 @@ export default function CityCard({
     if (code === 0)
       return {
         icon: "☀️",
-        text: "Clear Sky",
+        text: "Clear",
       };
 
     if ([1, 2, 3].includes(code))
       return {
         icon: "⛅",
-        text: "Partly Cloudy",
+        text: "Cloudy",
       };
 
     if ([45, 48].includes(code))
@@ -60,7 +60,7 @@ export default function CityCard({
     if (code >= 95)
       return {
         icon: "⛈️",
-        text: "Thunderstorm",
+        text: "Storm",
       };
 
     return {
@@ -94,17 +94,15 @@ export default function CityCard({
   return (
     <div
       style={{
-        background:
-          "linear-gradient(145deg,#1e293b,#0f172a)",
-        padding: "28px",
+        background: "var(--card)",
+        color: "var(--text)",
+        padding: "24px",
         borderRadius: "24px",
         textAlign: "center",
         border:
-          "1px solid rgba(255,255,255,0.08)",
+          "1px solid var(--border)",
         boxShadow:
-          "0 10px 40px rgba(0,0,0,0.4)",
-        transition:
-          "transform 0.3s ease",
+          "0 10px 40px var(--shadow)",
       }}
     >
       <h2>
@@ -113,14 +111,18 @@ export default function CityCard({
 
       {!weather ? (
         <div>
-          <h3>🌤️ Weather Unavailable</h3>
+          <h3>
+            🌤 Weather
+            Unavailable
+          </h3>
 
           <p
             style={{
-              color: "#94a3b8",
+              color:
+                "var(--secondary)",
             }}
           >
-            Using cached data...
+            Cached data unavailable
           </p>
         </div>
       ) : (
@@ -141,50 +143,24 @@ export default function CityCard({
           <h1
             style={{
               color: "#38bdf8",
-              marginBottom: "10px",
+              marginBottom: "8px",
             }}
           >
             {weather.temperature_2m}°C
           </h1>
 
-          <p>
-            🤒 Feels Like{" "}
+          <p
+            style={{
+              color:
+                "var(--secondary)",
+              marginBottom: "0",
+            }}
+          >
+            Feels Like{" "}
             {
               weather.apparent_temperature
             }
             °C
-          </p>
-
-          <p>
-            💧{" "}
-            {
-              weather.relative_humidity_2m
-            }
-            %
-          </p>
-
-          <p>
-            🌬️{" "}
-            {
-              weather.wind_speed_10m
-            }
-            km/h
-          </p>
-
-          <p>
-            🌅{" "}
-            {weather.sunrise?.slice(
-              11,
-              16
-            )}
-          </p>
-
-          <p>
-            🌇{" "}
-            {weather.sunset?.slice(
-              11,
-              16
-            )}
           </p>
         </>
       )}
@@ -192,25 +168,35 @@ export default function CityCard({
       <h1
         style={{
           color: "#38bdf8",
-          marginTop: "20px",
+          marginTop: "18px",
+          fontSize: "32px",
         }}
       >
         {time}
       </h1>
 
-      <p>{date}</p>
+      <p
+        style={{
+          color:
+            "var(--secondary)",
+        }}
+      >
+        {date}
+      </p>
 
       <p
         style={{
           color:
-            statusMap[status]?.color,
+            statusMap[status]
+              ?.color,
           fontWeight: "bold",
           fontSize: "18px",
-          marginTop: "12px",
+          marginTop: "10px",
         }}
       >
         {
-          statusMap[status]?.text
+          statusMap[status]
+            ?.text
         }
       </p>
     </div>

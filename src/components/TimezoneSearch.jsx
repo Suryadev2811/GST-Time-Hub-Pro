@@ -32,20 +32,35 @@ function TimezoneSearch() {
     }
   };
 
+  const copyTimezone = () => {
+    navigator.clipboard.writeText(
+      timezone
+    );
+
+    alert(
+      "✅ Timezone copied!"
+    );
+  };
+
   return (
     <div
       style={{
-        background:
-          "linear-gradient(145deg,#1e293b,#0f172a)",
+        background: "var(--card)",
+        color: "var(--text)",
         padding: "25px",
         borderRadius: "24px",
         marginTop: "40px",
         textAlign: "center",
+        border:
+          "1px solid var(--border)",
+        boxShadow:
+          "0 10px 40px var(--shadow)",
       }}
     >
       <h2
         style={{
           marginBottom: "20px",
+          color: "#38bdf8",
         }}
       >
         🔍 Timezone Search
@@ -56,7 +71,9 @@ function TimezoneSearch() {
         placeholder="Search timezone..."
         value={search}
         onChange={(e) =>
-          setSearch(e.target.value)
+          setSearch(
+            e.target.value
+          )
         }
         style={{
           padding: "12px",
@@ -64,7 +81,12 @@ function TimezoneSearch() {
           maxWidth: "100%",
           marginBottom: "15px",
           borderRadius: "10px",
-          border: "none",
+          border:
+            "1px solid var(--border)",
+          background:
+            "var(--card)",
+          color:
+            "var(--text)",
         }}
       />
 
@@ -73,23 +95,33 @@ function TimezoneSearch() {
       <select
         value={timezone}
         onChange={(e) =>
-          setTimezone(e.target.value)
+          setTimezone(
+            e.target.value
+          )
         }
         style={{
           padding: "12px",
           width: "320px",
           maxWidth: "100%",
           borderRadius: "10px",
+          border:
+            "1px solid var(--border)",
+          background:
+            "var(--card)",
+          color:
+            "var(--text)",
         }}
       >
-        {filteredTimezones.map((tz) => (
-          <option
-            key={tz}
-            value={tz}
-          >
-            {tz}
-          </option>
-        ))}
+        {filteredTimezones.map(
+          (tz) => (
+            <option
+              key={tz}
+              value={tz}
+            >
+              {tz}
+            </option>
+          )
+        )}
       </select>
 
       <h3
@@ -105,10 +137,35 @@ function TimezoneSearch() {
         style={{
           marginTop: "10px",
           fontSize: "18px",
+          color:
+            "var(--text)",
         }}
       >
         {getTime()}
       </p>
+
+      <button
+        onClick={
+          copyTimezone
+        }
+        style={{
+          marginTop: "15px",
+          padding:
+            "10px 18px",
+          borderRadius:
+            "10px",
+          border: "none",
+          background:
+            "#38bdf8",
+          color: "white",
+          cursor:
+            "pointer",
+          fontWeight:
+            "bold",
+        }}
+      >
+        📋 Copy Timezone
+      </button>
     </div>
   );
 }

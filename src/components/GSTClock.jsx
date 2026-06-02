@@ -35,29 +35,27 @@ function GSTClock() {
       1000
     );
 
-    return () =>
-      clearInterval(interval);
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div
       style={{
-        background:
-          "linear-gradient(145deg,#1e293b,#0f172a)",
+        background: "var(--card)",
         padding: "35px",
         borderRadius: "24px",
         textAlign: "center",
         marginBottom: "35px",
         boxShadow:
-          "0 10px 40px rgba(0,0,0,0.4)",
+          "0 10px 40px var(--shadow)",
         border:
-          "1px solid rgba(255,255,255,0.08)",
+          "1px solid var(--border)",
       }}
     >
       <h2
         style={{
           color: "#38bdf8",
-          marginBottom: "10px",
+          marginBottom: "15px",
           fontSize: "28px",
         }}
       >
@@ -67,10 +65,11 @@ function GSTClock() {
       <h1
         style={{
           fontSize:
-            "clamp(42px,7vw,90px)",
+            "clamp(3rem,8vw,6rem)",
+          lineHeight: "1",
           margin: "0",
           fontWeight: "900",
-          color: "#ffffff",
+          color: "var(--text)",
           letterSpacing: "2px",
         }}
       >
@@ -79,8 +78,8 @@ function GSTClock() {
 
       <p
         style={{
-          color: "#94a3b8",
-          marginTop: "15px",
+          color: "var(--secondary)",
+          marginTop: "20px",
           fontSize: "20px",
         }}
       >
@@ -101,13 +100,12 @@ function GSTClock() {
             background:
               "rgba(34,197,94,0.15)",
             color: "#22c55e",
-            padding:
-              "8px 14px",
+            padding: "8px 14px",
             borderRadius: "999px",
             fontWeight: "bold",
           }}
         >
-          Live
+          🟢 Live
         </span>
 
         <span
@@ -115,8 +113,7 @@ function GSTClock() {
             background:
               "rgba(56,189,248,0.15)",
             color: "#38bdf8",
-            padding:
-              "8px 14px",
+            padding: "8px 14px",
             borderRadius: "999px",
             fontWeight: "bold",
           }}

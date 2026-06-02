@@ -6,55 +6,10 @@ export default function ThemeToggle() {
   );
 
   useEffect(() => {
-    const root = document.documentElement;
-
-    if (dark) {
-      root.style.setProperty(
-        "--bg-primary",
-        "#020617"
-      );
-
-      root.style.setProperty(
-        "--bg-secondary",
-        "#0f172a"
-      );
-
-      root.style.setProperty(
-        "--text-primary",
-        "#ffffff"
-      );
-
-      root.style.setProperty(
-        "--text-secondary",
-        "#94a3b8"
-      );
-
-      document.body.style.background =
-        "#020617";
-    } else {
-      root.style.setProperty(
-        "--bg-primary",
-        "#f8fafc"
-      );
-
-      root.style.setProperty(
-        "--bg-secondary",
-        "#ffffff"
-      );
-
-      root.style.setProperty(
-        "--text-primary",
-        "#0f172a"
-      );
-
-      root.style.setProperty(
-        "--text-secondary",
-        "#475569"
-      );
-
-      document.body.style.background =
-        "#f8fafc";
-    }
+    document.documentElement.setAttribute(
+      "data-theme",
+      dark ? "dark" : "light"
+    );
 
     localStorage.setItem(
       "theme",
@@ -68,18 +23,13 @@ export default function ThemeToggle() {
       style={{
         padding: "12px 20px",
         borderRadius: "12px",
-        border: "none",
+        border: "1px solid var(--border)",
         cursor: "pointer",
         fontWeight: "bold",
-        background: dark
-          ? "#f8fafc"
-          : "#0f172a",
-        color: dark
-          ? "#0f172a"
-          : "#ffffff",
+        background: "var(--card)",
+        color: "var(--text)",
+        boxShadow: "0 4px 12px var(--shadow)",
         transition: "all 0.3s ease",
-        boxShadow:
-          "0 4px 15px rgba(0,0,0,0.2)",
       }}
     >
       {dark

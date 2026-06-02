@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 const TIMEZONES = [
   { label: "🇮🇳 India", value: "Asia/Kolkata" },
+  { label: "🇦🇪 Dubai", value: "Asia/Dubai" },
   { label: "🇬🇧 London", value: "Europe/London" },
   { label: "🇺🇸 New York", value: "America/New_York" },
   { label: "🇺🇸 Los Angeles", value: "America/Los_Angeles" },
@@ -30,9 +31,13 @@ function Favorites() {
   }, []);
 
   const addFavorite = () => {
-    if (favorites.includes(selectedTimezone)) return;
+    if (favorites.includes(selectedTimezone))
+      return;
 
-    const updated = [...favorites, selectedTimezone];
+    const updated = [
+      ...favorites,
+      selectedTimezone,
+    ];
 
     setFavorites(updated);
 
@@ -81,21 +86,20 @@ function Favorites() {
 
   const copyTimezone = (timezone) => {
     navigator.clipboard.writeText(timezone);
-    alert("Copied timezone!");
+    alert("✅ Timezone copied!");
   };
 
   return (
     <div
       style={{
-        background:
-          "linear-gradient(145deg,#1e293b,#0f172a)",
+        background: "var(--card)",
+        color: "var(--text)",
         padding: "30px",
         borderRadius: "24px",
         marginTop: "40px",
-        border:
-          "1px solid rgba(255,255,255,0.08)",
+        border: "1px solid var(--border)",
         boxShadow:
-          "0 10px 40px rgba(0,0,0,0.4)",
+          "0 10px 40px var(--shadow)",
       }}
     >
       <h2
@@ -103,6 +107,7 @@ function Favorites() {
           textAlign: "center",
           marginBottom: "25px",
           fontSize: "36px",
+          color: "#38bdf8",
         }}
       >
         ⭐ Favorite Timezones
@@ -125,6 +130,12 @@ function Favorites() {
           style={{
             padding: "12px",
             borderRadius: "10px",
+            border:
+              "1px solid var(--border)",
+            background:
+              "var(--card)",
+            color:
+              "var(--text)",
           }}
         >
           {TIMEZONES.map((tz) => (
@@ -157,11 +168,11 @@ function Favorites() {
         <p
           style={{
             textAlign: "center",
-            color: "#94a3b8",
+            color: "var(--secondary)",
             fontSize: "20px",
           }}
         >
-          No favorites added.
+          No favorites added yet.
         </p>
       ) : (
         <div
@@ -177,20 +188,15 @@ function Favorites() {
               key={timezone}
               style={{
                 background:
-                  "rgba(255,255,255,0.05)",
+                  "rgba(56,189,248,0.05)",
                 padding: "25px",
                 borderRadius: "20px",
                 textAlign: "center",
                 border:
-                  "1px solid rgba(255,255,255,0.08)",
-                transition: "0.3s",
+                  "1px solid var(--border)",
               }}
             >
-              <h3
-                style={{
-                  marginBottom: "15px",
-                }}
-              >
+              <h3>
                 🌍{" "}
                 {timezone.split("/")[1] ||
                   timezone}
@@ -208,7 +214,8 @@ function Favorites() {
 
               <p
                 style={{
-                  color: "#94a3b8",
+                  color:
+                    "var(--secondary)",
                   marginTop: "10px",
                 }}
               >
@@ -218,7 +225,8 @@ function Favorites() {
               <p
                 style={{
                   fontSize: "14px",
-                  color: "#cbd5e1",
+                  color:
+                    "var(--secondary)",
                   marginTop: "10px",
                 }}
               >
@@ -229,22 +237,29 @@ function Favorites() {
                 style={{
                   display: "flex",
                   gap: "10px",
-                  justifyContent: "center",
+                  justifyContent:
+                    "center",
                   marginTop: "15px",
                   flexWrap: "wrap",
                 }}
               >
                 <button
                   onClick={() =>
-                    copyTimezone(timezone)
+                    copyTimezone(
+                      timezone
+                    )
                   }
                   style={{
-                    padding: "8px 14px",
-                    borderRadius: "8px",
+                    padding:
+                      "8px 14px",
+                    borderRadius:
+                      "8px",
                     border: "none",
-                    background: "#38bdf8",
+                    background:
+                      "#38bdf8",
                     color: "white",
-                    cursor: "pointer",
+                    cursor:
+                      "pointer",
                   }}
                 >
                   📋 Copy
@@ -252,15 +267,21 @@ function Favorites() {
 
                 <button
                   onClick={() =>
-                    removeFavorite(timezone)
+                    removeFavorite(
+                      timezone
+                    )
                   }
                   style={{
-                    padding: "8px 14px",
-                    borderRadius: "8px",
+                    padding:
+                      "8px 14px",
+                    borderRadius:
+                      "8px",
                     border: "none",
-                    background: "#ef4444",
+                    background:
+                      "#ef4444",
                     color: "white",
-                    cursor: "pointer",
+                    cursor:
+                      "pointer",
                   }}
                 >
                   ❌ Remove

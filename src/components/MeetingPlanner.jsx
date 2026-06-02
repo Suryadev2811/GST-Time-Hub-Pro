@@ -41,6 +41,39 @@ export default function MeetingPlanner() {
     );
   };
 
+  const getMeetingScore = () => {
+    let score = 0;
+
+    zones.forEach((z) => {
+      const today =
+        new Date().toISOString().split("T")[0];
+
+      const gstDate = new Date(
+        `${today}T${meetingTime}:00`
+      );
+
+      const localHour = Number(
+        gstDate.toLocaleString(
+          "en-US",
+          {
+            timeZone: z.zone,
+            hour: "2-digit",
+            hour12: false,
+          }
+        )
+      );
+
+      if (
+        localHour >= 9 &&
+        localHour <= 17
+      ) {
+        score += 25;
+      }
+    });
+
+    return score;
+  };
+
   const exportMeeting = () => {
     let text =
       "GST Time Hub Meeting Schedule\n\n";
@@ -50,6 +83,8 @@ export default function MeetingPlanner() {
         z.zone
       )}\n`;
     });
+
+    text += `\nMeeting Score: ${getMeetingScore()}%`;
 
     const blob = new Blob(
       [text],
@@ -70,25 +105,37 @@ export default function MeetingPlanner() {
     link.click();
   };
 
+  const score =
+    getMeetingScore();
+
   return (
     <div
       style={{
-        background:
-          "linear-gradient(145deg,#1e293b,#0f172a)",
+        background: "var(--card)",
+        color: "var(--text)",
         padding: "30px",
         borderRadius: "24px",
         textAlign: "center",
         boxShadow:
-          "0 10px 40px rgba(0,0,0,0.4)",
+          "0 10px 40px var(--shadow)",
         border:
-          "1px solid rgba(255,255,255,0.08)",
+          "1px solid var(--border)",
       }}
     >
-      <h2>
+      <h2
+        style={{
+          color: "#38bdf8",
+          marginBottom: "10px",
+        }}
+      >
         🤝 Smart Meeting Planner
       </h2>
 
-      <p>
+      <p
+        style={{
+          color: "var(--secondary)",
+        }}
+      >
         Select GST Meeting Time
       </p>
 
@@ -101,9 +148,14 @@ export default function MeetingPlanner() {
           )
         }
         style={{
-          padding: "10px",
+          padding: "12px",
           borderRadius: "10px",
           marginTop: "10px",
+          background:
+            "var(--card)",
+          color: "var(--text)",
+          border:
+            "1px solid var(--border)",
         }}
       />
 
@@ -113,7 +165,7 @@ export default function MeetingPlanner() {
           marginTop: "20px",
         }}
       >
-        Recommended Slot:
+        Selected GST Time:
         {" "}
         {meetingTime}
       </h3>
@@ -132,9 +184,11 @@ export default function MeetingPlanner() {
             key={z.name}
             style={{
               background:
-                "rgba(255,255,255,0.05)",
+                "rgba(56,189,248,0.08)",
               padding: "20px",
               borderRadius: "18px",
+              border:
+                "1px solid var(--border)",
             }}
           >
             <h3>{z.name}</h3>
@@ -154,29 +208,41 @@ export default function MeetingPlanner() {
 
       <h3
         style={{
-          color: "#38bdf8",
+          color:
+            score >= 75
+              ? "#22c55e"
+              : score >= 50
+              ? "#f59e0b"
+              : "#ef4444",
           marginTop: "25px",
         }}
       >
-        Meeting Score: 94%
+        Meeting Score: {score}%
       </h3>
+
+      <p
+        style={{
+          color:
+            "var(--secondary)",
+          marginTop: "8px",
+        }}
+      >
+        Based on how many locations
+        fall within standard business
+        hours (9 AM – 5 PM).
+      </p>
 
       <button
         onClick={exportMeeting}
         style={{
-          marginTop: "15px",
-          padding:
-            "10px 18px",
-          borderRadius:
-            "10px",
+          marginTop: "20px",
+          padding: "12px 20px",
+          borderRadius: "10px",
           border: "none",
-          background:
-            "#22c55e",
+          background: "#22c55e",
           color: "white",
-          cursor:
-            "pointer",
-          fontWeight:
-            "bold",
+          cursor: "pointer",
+          fontWeight: "bold",
         }}
       >
         📄 Export Schedule

@@ -13,9 +13,8 @@ function App() {
     <div
       style={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(circle at top,var(--bg-secondary,#1e3a8a) 0%,var(--bg-primary,#020617) 100%)",
-        color: "var(--text-primary,#ffffff)",
+        background: "var(--bg)",
+        color: "var(--text)",
         fontFamily: "'Segoe UI', sans-serif",
         padding: "20px",
         transition: "all 0.3s ease",
@@ -51,7 +50,7 @@ function App() {
 
           <p
             style={{
-              color: "#94a3b8",
+              color: "var(--secondary)",
               fontSize: "24px",
               maxWidth: "850px",
               margin: "0 auto",
@@ -83,6 +82,8 @@ function App() {
                   border: "none",
                   cursor: "pointer",
                   fontWeight: "bold",
+                  background: "#6b7280",
+                  color: "white",
                 }}
               >
                 🚀 GitHub
@@ -116,7 +117,7 @@ function App() {
         <WeatherWidget />
 
         <StatsCards />
-        
+
         <MeetingPlanner />
 
         <section
@@ -157,8 +158,7 @@ function App() {
             marginTop: "80px",
             paddingTop: "35px",
             paddingBottom: "35px",
-            borderTop:
-              "1px solid rgba(255,255,255,0.1)",
+            borderTop: "1px solid var(--border)",
           }}
         >
           <h2
@@ -172,7 +172,7 @@ function App() {
 
           <p
             style={{
-              color: "#cbd5e1",
+              color: "var(--text)",
               marginBottom: "10px",
             }}
           >
@@ -181,7 +181,7 @@ function App() {
 
           <p
             style={{
-              color: "#94a3b8",
+              color: "var(--secondary)",
               marginBottom: "10px",
             }}
           >
@@ -190,7 +190,8 @@ function App() {
 
           <p
             style={{
-              color: "#64748b",
+              color: "var(--secondary)",
+              opacity: 0.8,
               fontSize: "14px",
             }}
           >

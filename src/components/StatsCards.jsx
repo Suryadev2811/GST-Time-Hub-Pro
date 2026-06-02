@@ -4,7 +4,8 @@ export default function StatsCards() {
   const [favoritesCount, setFavoritesCount] =
     useState(0);
 
-  const [gstTime, setGstTime] = useState("");
+  const [gstTime, setGstTime] =
+    useState("");
 
   useEffect(() => {
     const favorites =
@@ -23,10 +24,10 @@ export default function StatsCards() {
         now.toLocaleTimeString(
           "en-US",
           {
-            timeZone:
-              "Asia/Dubai",
+            timeZone: "Asia/Dubai",
             hour: "2-digit",
             minute: "2-digit",
+            hour12: true,
           }
         )
       );
@@ -37,7 +38,7 @@ export default function StatsCards() {
     const interval =
       setInterval(
         updateGST,
-        1000
+        60000
       );
 
     return () =>
@@ -86,17 +87,14 @@ export default function StatsCards() {
           key={s.label}
           style={{
             background:
-              "linear-gradient(145deg,#1e293b,#0f172a)",
-            padding: "25px",
+              "var(--card)",
+            padding: "24px",
             borderRadius: "24px",
             textAlign: "center",
-            boxShadow:
-              "0 10px 30px rgba(0,0,0,0.4)",
             border:
-              "1px solid rgba(255,255,255,0.08)",
-            transition:
-              "all 0.3s ease",
-            cursor: "pointer",
+              "1px solid var(--border)",
+            boxShadow:
+              "0 10px 30px var(--shadow)",
           }}
         >
           <div
@@ -107,23 +105,39 @@ export default function StatsCards() {
             {s.icon}
           </div>
 
-          <h1
+          <h2
             style={{
               margin:
                 "10px 0",
               color:
                 "#38bdf8",
+
+              fontSize:
+                s.label ===
+                "Current GST"
+                  ? "22px"
+                  : "48px",
+
+              fontWeight:
+                "700",
+
+              lineHeight:
+                "1.1",
+
+              overflowWrap:
+                "break-word",
             }}
           >
             {s.value}
-          </h1>
+          </h2>
 
           <p
             style={{
               color:
-                "#cbd5e1",
+                "var(--secondary)",
               fontSize:
                 "18px",
+              margin: 0,
             }}
           >
             {s.label}

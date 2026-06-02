@@ -52,7 +52,6 @@ function TimeConverter() {
     });
 
     navigator.clipboard.writeText(text);
-
     alert("✅ Times copied successfully!");
   };
 
@@ -75,28 +74,28 @@ function TimeConverter() {
     const link = document.createElement("a");
 
     link.href = URL.createObjectURL(blob);
-
     link.download = "gst-conversion.txt";
-
     link.click();
   };
 
   return (
     <div
       style={{
-        background:
-          "linear-gradient(145deg,#1e293b,#0f172a)",
+        background: "var(--card)",
+        color: "var(--text)",
         padding: "30px",
         borderRadius: "24px",
         marginTop: "40px",
+        border: "1px solid var(--border)",
         boxShadow:
-          "0 10px 40px rgba(0,0,0,0.4)",
+          "0 10px 40px var(--shadow)",
       }}
     >
       <h2
         style={{
           textAlign: "center",
           marginBottom: "20px",
+          color: "#38bdf8",
         }}
       >
         🌍 GST Time Converter
@@ -119,7 +118,7 @@ function TimeConverter() {
           style={{
             padding: "10px",
             borderRadius: "8px",
-            border: "none",
+            border: "1px solid var(--border)",
           }}
         />
 
@@ -128,10 +127,10 @@ function TimeConverter() {
           style={{
             padding: "10px 20px",
             borderRadius: "8px",
-            cursor: "pointer",
             border: "none",
             background: "#38bdf8",
-            color: "#fff",
+            color: "white",
+            cursor: "pointer",
             fontWeight: "bold",
           }}
         >
@@ -143,10 +142,10 @@ function TimeConverter() {
           style={{
             padding: "10px 20px",
             borderRadius: "8px",
-            cursor: "pointer",
             border: "none",
             background: "#22c55e",
-            color: "#fff",
+            color: "white",
+            cursor: "pointer",
             fontWeight: "bold",
           }}
         >
@@ -157,85 +156,116 @@ function TimeConverter() {
       <p
         style={{
           textAlign: "center",
-          marginTop: "15px",
+          marginTop: "20px",
+          color: "var(--text)",
+          fontWeight: "bold",
+          fontSize: "18px",
         }}
       >
         Selected GST Time:{" "}
-        <b>{gstTime || "None"}</b>
+        {gstTime || "None"}
       </p>
 
       <p
         style={{
           textAlign: "center",
           color: "#38bdf8",
-          marginTop: "8px",
         }}
       >
         Showing {cities.length} cities
       </p>
 
       {gstTime && (
-        <table
+        <div
           style={{
-            width: "100%",
-            marginTop: "25px",
-            borderCollapse: "collapse",
+            overflowX: "auto",
           }}
         >
-          <thead>
-            <tr>
-              <th style={{ padding: "12px" }}>
-                🌎 City
-              </th>
-
-              <th style={{ padding: "12px" }}>
-                ⏱ GST Difference
-              </th>
-
-              <th style={{ padding: "12px" }}>
-                🕒 Converted Time
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {cities.map((city) => (
-              <tr key={city.city}>
-                <td
+          <table
+            style={{
+              width: "100%",
+              marginTop: "25px",
+              borderCollapse: "collapse",
+            }}
+          >
+            <thead>
+              <tr>
+                <th
                   style={{
                     padding: "12px",
-                    borderTop:
-                      "1px solid #334155",
+                    color: "var(--text)",
                   }}
                 >
-                  {city.city}
-                </td>
+                  🌎 City
+                </th>
 
-                <td
+                <th
                   style={{
                     padding: "12px",
-                    borderTop:
-                      "1px solid #334155",
+                    color: "var(--text)",
                   }}
                 >
-                  GST {city.diff}
-                </td>
+                  ⏱ GST Difference
+                </th>
 
-                <td
+                <th
                   style={{
                     padding: "12px",
-                    borderTop:
-                      "1px solid #334155",
-                    color: "#38bdf8",
-                    fontWeight: "bold",
+                    color: "var(--text)",
                   }}
                 >
-                  {convertTime(city.zone)}
-                </td>
+                  🕒 Converted Time
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {cities.map((city, index) => (
+                <tr
+                  key={city.city}
+                  style={{
+                    background:
+                      index % 2 === 0
+                        ? "transparent"
+                        : "rgba(56,189,248,0.05)",
+                  }}
+                >
+                  <td
+                    style={{
+                      padding: "12px",
+                      borderTop:
+                        "1px solid var(--border)",
+                    }}
+                  >
+                    {city.city}
+                  </td>
+
+                  <td
+                    style={{
+                      padding: "12px",
+                      borderTop:
+                        "1px solid var(--border)",
+                    }}
+                  >
+                    GST {city.diff}
+                  </td>
+
+                  <td
+                    style={{
+                      padding: "12px",
+                      borderTop:
+                        "1px solid var(--border)",
+                      color: "#38bdf8",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {convertTime(city.zone)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
