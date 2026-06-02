@@ -1,9 +1,74 @@
+import { useEffect, useState } from "react";
+
 export default function StatsCards() {
+  const [favoritesCount, setFavoritesCount] =
+    useState(0);
+
+  const [gstTime, setGstTime] = useState("");
+
+  useEffect(() => {
+    const favorites =
+      JSON.parse(
+        localStorage.getItem("favorites")
+      ) || [];
+
+    setFavoritesCount(
+      favorites.length
+    );
+
+    const updateGST = () => {
+      const now = new Date();
+
+      setGstTime(
+        now.toLocaleTimeString(
+          "en-US",
+          {
+            timeZone:
+              "Asia/Dubai",
+            hour: "2-digit",
+            minute: "2-digit",
+          }
+        )
+      );
+    };
+
+    updateGST();
+
+    const interval =
+      setInterval(
+        updateGST,
+        1000
+      );
+
+    return () =>
+      clearInterval(interval);
+  }, []);
+
   const stats = [
-    ["🌎 Timezones", "597"],
-    ["🌍 Countries", "195+"],
-    ["⭐ Favorites", "∞"],
-    ["⚡ Live Sync", "24/7"],
+    {
+      icon: "🌎",
+      label: "Timezones",
+      value: "597",
+    },
+
+    {
+      icon: "🌍",
+      label: "Countries",
+      value: "195+",
+    },
+
+    {
+      icon: "⭐",
+      label: "Favorites",
+      value:
+        favoritesCount,
+    },
+
+    {
+      icon: "⏰",
+      label: "Current GST",
+      value: gstTime,
+    },
   ];
 
   return (
@@ -18,7 +83,7 @@ export default function StatsCards() {
     >
       {stats.map((s) => (
         <div
-          key={s[0]}
+          key={s.label}
           style={{
             background:
               "linear-gradient(145deg,#1e293b,#0f172a)",
@@ -29,25 +94,39 @@ export default function StatsCards() {
               "0 10px 30px rgba(0,0,0,0.4)",
             border:
               "1px solid rgba(255,255,255,0.08)",
+            transition:
+              "all 0.3s ease",
+            cursor: "pointer",
           }}
         >
-          <h1
+          <div
             style={{
-              margin: 0,
-              color: "#38bdf8",
+              fontSize: "32px",
             }}
           >
-            {s[1]}
+            {s.icon}
+          </div>
+
+          <h1
+            style={{
+              margin:
+                "10px 0",
+              color:
+                "#38bdf8",
+            }}
+          >
+            {s.value}
           </h1>
 
           <p
             style={{
-              marginTop: "10px",
-              color: "#cbd5e1",
-              fontSize: "18px",
+              color:
+                "#cbd5e1",
+              fontSize:
+                "18px",
             }}
           >
-            {s[0]}
+            {s.label}
           </p>
         </div>
       ))}

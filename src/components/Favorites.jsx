@@ -19,11 +19,11 @@ function Favorites() {
     JSON.parse(localStorage.getItem("favorites")) || []
   );
 
-  const [currentTime, setCurrentTime] = useState(Date.now());
+  const [, setTick] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentTime(Date.now());
+      setTick((prev) => prev + 1);
     }, 1000);
 
     return () => clearInterval(timer);
@@ -60,8 +60,28 @@ function Favorites() {
       "en-US",
       {
         timeZone: timezone,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
       }
     );
+  };
+
+  const getDate = (timezone) => {
+    return new Date().toLocaleDateString(
+      "en-US",
+      {
+        timeZone: timezone,
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+      }
+    );
+  };
+
+  const copyTimezone = (timezone) => {
+    navigator.clipboard.writeText(timezone);
+    alert("Copied timezone!");
   };
 
   return (
@@ -69,15 +89,20 @@ function Favorites() {
       style={{
         background:
           "linear-gradient(145deg,#1e293b,#0f172a)",
-        padding: "25px",
+        padding: "30px",
         borderRadius: "24px",
         marginTop: "40px",
+        border:
+          "1px solid rgba(255,255,255,0.08)",
+        boxShadow:
+          "0 10px 40px rgba(0,0,0,0.4)",
       }}
     >
       <h2
         style={{
           textAlign: "center",
           marginBottom: "25px",
+          fontSize: "36px",
         }}
       >
         ⭐ Favorite Timezones
@@ -88,7 +113,7 @@ function Favorites() {
           display: "flex",
           justifyContent: "center",
           gap: "10px",
-          marginBottom: "25px",
+          marginBottom: "30px",
           flexWrap: "wrap",
         }}
       >
@@ -97,6 +122,10 @@ function Favorites() {
           onChange={(e) =>
             setSelectedTimezone(e.target.value)
           }
+          style={{
+            padding: "12px",
+            borderRadius: "10px",
+          }}
         >
           {TIMEZONES.map((tz) => (
             <option
@@ -108,8 +137,19 @@ function Favorites() {
           ))}
         </select>
 
-        <button onClick={addFavorite}>
-          Add
+        <button
+          onClick={addFavorite}
+          style={{
+            padding: "12px 20px",
+            borderRadius: "10px",
+            border: "none",
+            cursor: "pointer",
+            background: "#22c55e",
+            color: "white",
+            fontWeight: "bold",
+          }}
+        >
+          ➕ Add Favorite
         </button>
       </div>
 
@@ -117,6 +157,8 @@ function Favorites() {
         <p
           style={{
             textAlign: "center",
+            color: "#94a3b8",
+            fontSize: "20px",
           }}
         >
           No favorites added.
@@ -126,7 +168,7 @@ function Favorites() {
           style={{
             display: "grid",
             gridTemplateColumns:
-              "repeat(auto-fit,minmax(220px,1fr))",
+              "repeat(auto-fit,minmax(250px,1fr))",
             gap: "20px",
           }}
         >
@@ -136,37 +178,94 @@ function Favorites() {
               style={{
                 background:
                   "rgba(255,255,255,0.05)",
-                padding: "20px",
-                borderRadius: "18px",
+                padding: "25px",
+                borderRadius: "20px",
                 textAlign: "center",
                 border:
                   "1px solid rgba(255,255,255,0.08)",
+                transition: "0.3s",
               }}
             >
-              <h3>
+              <h3
+                style={{
+                  marginBottom: "15px",
+                }}
+              >
                 🌍{" "}
                 {timezone.split("/")[1] ||
                   timezone}
               </h3>
 
-              <h2
+              <h1
                 style={{
                   color: "#38bdf8",
+                  fontSize: "32px",
+                  margin: "0",
                 }}
               >
                 {getTime(timezone)}
-              </h2>
+              </h1>
 
-              <button
-                onClick={() =>
-                  removeFavorite(timezone)
-                }
+              <p
                 style={{
+                  color: "#94a3b8",
                   marginTop: "10px",
                 }}
               >
-                ❌ Remove
-              </button>
+                {getDate(timezone)}
+              </p>
+
+              <p
+                style={{
+                  fontSize: "14px",
+                  color: "#cbd5e1",
+                  marginTop: "10px",
+                }}
+              >
+                {timezone}
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  justifyContent: "center",
+                  marginTop: "15px",
+                  flexWrap: "wrap",
+                }}
+              >
+                <button
+                  onClick={() =>
+                    copyTimezone(timezone)
+                  }
+                  style={{
+                    padding: "8px 14px",
+                    borderRadius: "8px",
+                    border: "none",
+                    background: "#38bdf8",
+                    color: "white",
+                    cursor: "pointer",
+                  }}
+                >
+                  📋 Copy
+                </button>
+
+                <button
+                  onClick={() =>
+                    removeFavorite(timezone)
+                  }
+                  style={{
+                    padding: "8px 14px",
+                    borderRadius: "8px",
+                    border: "none",
+                    background: "#ef4444",
+                    color: "white",
+                    cursor: "pointer",
+                  }}
+                >
+                  ❌ Remove
+                </button>
+              </div>
             </div>
           ))}
         </div>

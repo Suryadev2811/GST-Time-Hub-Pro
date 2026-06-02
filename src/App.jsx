@@ -14,10 +14,11 @@ function App() {
       style={{
         minHeight: "100vh",
         background:
-          "radial-gradient(circle at top, #1e3a8a 0%, #0f172a 40%, #020617 100%)",
-        color: "white",
+          "radial-gradient(circle at top,var(--bg-secondary,#1e3a8a) 0%,var(--bg-primary,#020617) 100%)",
+        color: "var(--text-primary,#ffffff)",
         fontFamily: "'Segoe UI', sans-serif",
         padding: "20px",
+        transition: "all 0.3s ease",
       }}
     >
       <div
@@ -36,13 +37,13 @@ function App() {
         >
           <h1
             style={{
-              fontSize: "clamp(42px,5vw,72px)",
+              fontSize: "clamp(48px,6vw,82px)",
               fontWeight: "900",
               marginBottom: "15px",
               lineHeight: "1.1",
               color: "#38bdf8",
               textShadow:
-                "0 0 25px rgba(56,189,248,0.35)",
+                "0 0 30px rgba(56,189,248,0.35)",
             }}
           >
             GST Time Hub Pro 🌍
@@ -52,7 +53,7 @@ function App() {
             style={{
               color: "#94a3b8",
               fontSize: "24px",
-              maxWidth: "800px",
+              maxWidth: "850px",
               margin: "0 auto",
             }}
           >
@@ -61,25 +62,63 @@ function App() {
 
           <div
             style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "15px",
               marginTop: "25px",
+              flexWrap: "wrap",
             }}
           >
             <ThemeToggle />
+
+            <a
+              href="https://github.com/Suryadev2811/GST-Time-Hub-Pro"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <button
+                style={{
+                  padding: "12px 20px",
+                  borderRadius: "12px",
+                  border: "none",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                }}
+              >
+                🚀 GitHub
+              </button>
+            </a>
+
+            <a
+              href="https://gst-time-hub-pro.vercel.app"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <button
+                style={{
+                  padding: "12px 20px",
+                  borderRadius: "12px",
+                  border: "none",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  background: "#22c55e",
+                  color: "white",
+                }}
+              >
+                🌐 Live Demo
+              </button>
+            </a>
           </div>
         </div>
 
-        {/* CLOCK */}
         <GSTClock />
 
         <WeatherWidget />
 
-        {/* STATS */}
         <StatsCards />
 
-        {/* MEETING PLANNER */}
         <MeetingPlanner />
 
-        {/* WORLD DASHBOARD */}
         <section
           style={{
             marginTop: "50px",
@@ -88,7 +127,6 @@ function App() {
           <WorldDashboard />
         </section>
 
-        {/* CONVERTER */}
         <section
           style={{
             marginTop: "40px",
@@ -97,7 +135,6 @@ function App() {
           <TimeConverter />
         </section>
 
-        {/* SEARCH */}
         <section
           style={{
             marginTop: "40px",
@@ -106,7 +143,6 @@ function App() {
           <TimezoneSearch />
         </section>
 
-        {/* FAVORITES */}
         <section
           style={{
             marginTop: "40px",
@@ -115,13 +151,12 @@ function App() {
           <Favorites />
         </section>
 
-        {/* FOOTER */}
         <footer
           style={{
             textAlign: "center",
             marginTop: "80px",
-            paddingTop: "30px",
-            paddingBottom: "30px",
+            paddingTop: "35px",
+            paddingBottom: "35px",
             borderTop:
               "1px solid rgba(255,255,255,0.1)",
           }}
@@ -150,7 +185,7 @@ function App() {
               marginBottom: "10px",
             }}
           >
-            Built with React • Day.js • Modern Web APIs
+            Built with React • Vite • Day.js • Open-Meteo API
           </p>
 
           <p
