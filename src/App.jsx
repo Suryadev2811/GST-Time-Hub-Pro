@@ -116,7 +116,7 @@ function App() {
         <WeatherWidget />
 
         <StatsCards />
-
+        
         <MeetingPlanner />
 
         <section
